@@ -122,7 +122,7 @@
   const themeBtn = $('#theme-btn'), themeLabel = $('#theme-label');
   function applyTheme(t, save) {
     root.setAttribute('data-theme', t);
-    themeLabel.textContent = t === 'night' ? 'Day_Mode' : 'Night_Mode';
+    themeLabel.textContent = t === 'night' ? 'Day mode' : 'Night mode';
     themeBtn.setAttribute('aria-pressed', String(t === 'day'));
     const meta = $('meta[name="theme-color"]'); if (meta) meta.content = t === 'night' ? '#0d0d12' : '#cfe0ff';
     if (save) { try { localStorage.setItem('ks-theme', t); } catch (e) {} }
@@ -250,6 +250,25 @@
     });
   })();
 
+
+  /* ---------- Footer one-liners ---------- */
+  (function quips() {
+    const b = $('#quip'); if (!b) return;
+    const lines = [
+      "There's no place like 127.0.0.1",
+      "It works on my machine. Let me check yours.",
+      "sudo make me a sandwich",
+      "Trust, but verify (the hash).",
+      "Weak passwords are just open doors with extra steps.",
+      "Segfaults: the OS politely saying no.",
+      "Merkle trees: because trusting one record is not enough.",
+      "There are 10 kinds of people: those who read binary, and those who don't.",
+      "Have you tried turning it off and on again? (Please don't, it's a honeypot.)"
+    ];
+    let i = 0;
+    b.addEventListener('click', () => { i = (i + 1 + Math.floor(Math.random() * (lines.length - 1))) % lines.length; b.textContent = lines[i] + ' ↻'; });
+  })();
+
   /* ---------- Terminal ---------- */
   (function terminal() {
     const out = $('#term-out'), input = $('#term-in'), body = $('#term'), form = $('#term-form');
@@ -330,7 +349,7 @@
 
     function run(raw) {
       const line = raw.trim(); if (!line) return;
-      row(['kunal@secos:~$ ', line], 'cmd');
+      row(['kunal@portfolio:~$ ', line], 'cmd');
       history.push(line); hi = history.length;
       const [name, ...rest] = line.split(/\s+/); const arg = rest.join(' ');
       if (/rm\s+-rf/.test(line)) { row('Nice try. This portfolio is read-only.', 'err'); return; }
@@ -353,7 +372,7 @@
     body.addEventListener('click', e => { if (!window.getSelection().toString() && e.target.tagName !== 'A') input.focus({ preventScroll: true }); });
     $$('.term-chips .chip').forEach(b => b.addEventListener('click', () => run(b.dataset.cmd)));
 
-    row('KS SecOS [Version 1.0] · type "help" for commands', 'dim');
+    row('Kunal Singh · portfolio shell v1.0 · type "help" for commands', 'dim');
     row('Welcome. Try: whoami, projects, open chainlog', 'dim');
     blank();
   })();
