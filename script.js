@@ -72,14 +72,15 @@
       concepts: ['Honeypots', 'Log parsing', 'Normalization & SQL aggregation', 'Attacker behaviour']
     },
     disaster: {
-      name: 'Disaster Resource Allocation', file: 'DISASTER_DB.SQL', label: 'DBMS',
-      sum: 'A database-driven system for managing and allocating disaster-relief resources.',
+      name: 'ResNav \u2014 Disaster Resource Allocation', file: 'RESNAV.SQL', label: 'FULL-STACK / DBMS',
+      sum: 'Relief logistics where the database, not the application, guarantees that stock is never promised twice.',
       how: [
-        'A normalized relational schema separates relief centers, stock and requests.',
-        'Foreign keys keep every request tied to a real item and center.',
-        'SQL triggers automate allocation and keep inventory consistent as requests are served.'
+        'A React console calls a Flask API, which hands the allocation decision to MySQL rather than making it.',
+        'A stored procedure locks every candidate stock row in primary-key order, then assigns the nearest centre with stock by haversine distance \u2014 so the plan the operator sees is the dispatch that happens.',
+        'Ten triggers and twenty-two CHECK constraints hold the invariants against any client, including a direct SQL session.',
+        'Two-session tests show the old read-then-write design committing 20 units against 10 in stock, and the locked version refusing to.'
       ],
-      concepts: ['Normalization', 'Keys & constraints', 'Triggers', 'Transactions']
+      concepts: ['Stored procedures', 'Triggers', 'Row locking', 'Isolation levels', 'Deadlocks', 'Normalization (3NF/BCNF)', 'Transactions']
     }
   };
 

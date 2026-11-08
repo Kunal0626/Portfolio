@@ -216,7 +216,7 @@
       </div>
     </article>
 
-    <article class="card proj reveal" data-id="queryshield" data-status="done" data-repo="https://github.com/Kunal0626/queryshield">
+    <article class="card proj reveal" data-id="queryshield" data-status="done" data-repo="https://github.com/Kunal0626/queryshield-proxy">
       <div class="titlebar dark"><span class="mono">▣ QUERYSHIELD.JAR</span><span class="mono status"></span></div>
       <div class="proj-body">
         <div class="proj-text">
@@ -300,26 +300,29 @@
     </article>
 
     <article class="card proj reveal" data-id="disaster" data-status="done" data-repo="https://github.com/Kunal0626/disaster-resource-allocation">
-      <div class="titlebar dark"><span class="mono">▣ DISASTER_DB.SQL</span><span class="mono status"></span></div>
+      <div class="titlebar dark"><span class="mono">▣ RESNAV.SQL</span><span class="mono status"></span></div>
       <div class="proj-body">
         <div class="proj-text">
-          <p class="label mono" data-color="violet">DBMS</p>
-          <h3>Disaster Resource Allocation</h3>
-          <p>A database-driven system for managing and allocating disaster-relief resources. A normalized relational schema keeps data clean, and SQL triggers automate allocation and keep inventory consistent.</p>
-          <ul class="tech mono"><li>SQL</li><li>Normalization</li><li>Triggers</li></ul>
+          <p class="label mono" data-color="violet">FULL-STACK / DBMS</p>
+          <h3>ResNav &mdash; Disaster Resource Allocation</h3>
+          <p>Full-stack relief logistics where the database is the source of truth. A React console calls a Flask API, but the allocation itself runs inside MySQL: a stored procedure takes row locks in a fixed order and assigns the nearest relief centre with stock, so two dispatchers cannot promise the same units. Ten triggers and twenty-two constraints hold the invariants; two-session tests prove the race is gone.</p>
+          <ul class="tech mono"><li>MySQL</li><li>Stored procedures</li><li>Triggers</li><li>Concurrency</li><li>Flask</li><li>React</li></ul>
           <div class="btn-row"><a class="btn btn-black gh" href="#" target="_blank" rel="noopener noreferrer">GitHub</a><button class="btn" type="button" data-open="disaster">Details</button></div>
         </div>
-        <div class="diagram" role="img" aria-label="Entity diagram: relief centers, stock and requests tables linked by keys, with a trigger that updates stock when an allocation happens.">
+        <div class="diagram" role="img" aria-label="Diagram: two React dispatcher consoles call one Flask API, which hands the request to a stored procedure inside MySQL. The procedure locks the nearest relief centre's stock row with FOR UPDATE, so one dispatcher commits ten units while the other waits and is then refused.">
           <svg viewBox="0 0 520 260" aria-hidden="true">
-            <g class="ln"><path d="M132 110H200M320 110H388M260 205V170"/></g>
-            <rect class="n" x="12" y="50" width="120" height="120"/><rect class="n dk" x="12" y="50" width="120" height="26"/><text class="t w" x="72" y="63">CENTERS</text>
-            <text class="code k" x="22" y="96">center_id  PK</text><text class="code k" x="22" y="116">name</text><text class="code k" x="22" y="136">region</text>
-            <rect class="n" x="200" y="50" width="120" height="120"/><rect class="n y" x="200" y="50" width="120" height="26"/><text class="t" x="260" y="63">STOCK</text>
-            <text class="code k" x="210" y="96">item_id    PK</text><text class="code k" x="210" y="116">center_id  FK</text><text class="code k" x="210" y="136">qty</text>
-            <rect class="n" x="388" y="50" width="120" height="120"/><rect class="n dk" x="388" y="50" width="120" height="26"/><text class="t w" x="448" y="63">REQUESTS</text>
-            <text class="code k" x="398" y="96">req_id     PK</text><text class="code k" x="398" y="116">item_id    FK</text><text class="code k" x="398" y="136">qty_needed</text>
-            <text class="t sm" x="166" y="100">1</text><text class="t sm" x="354" y="100">∞</text>
-            <rect class="n y" x="130" y="205" width="260" height="36"/><text class="t" x="260" y="217">⚡ TRIGGER: on allocation</text><text class="t sm" x="260" y="232">→ update stock, block over-allocation</text>
+            <rect x="232" y="16" width="276" height="230" rx="10" fill="none" stroke="#000" stroke-width="2.5" stroke-dasharray="7 6"/>
+            <g class="ln"><path d="M98 61H111V129H124M98 185H111V129M200 129H216V69H248M430 69H438M339 94V116M360 160V172H305V184M360 160V172H435V184"/></g>
+            <g class="ar"><path d="M116 123l8 6-8 6zM240 63l8 6-8 6zM333 108l6 8 6-8zM299 176l6 8 6-8zM429 176l6 8 6-8z"/></g>
+            <rect class="n" x="6" y="38" width="92" height="46"/><text class="t" x="52" y="53">REACT</text><text class="t sm" x="52" y="71">dispatcher A</text>
+            <rect class="n" x="6" y="162" width="92" height="46"/><text class="t" x="52" y="177">REACT</text><text class="t sm" x="52" y="195">dispatcher B</text>
+            <rect class="n" x="124" y="100" width="76" height="58"/><text class="t" x="162" y="121">FLASK</text><text class="t sm" x="162" y="139">API</text>
+            <rect class="n dk" x="244" y="6" width="176" height="22"/><text class="t w" x="332" y="17">MySQL &#183; SOURCE OF TRUTH</text>
+            <rect class="n y" x="248" y="44" width="182" height="50"/><text class="t" x="339" y="61">sp_allocate_request</text><text class="t sm" x="339" y="79">locks rows in PK order</text>
+            <rect class="n dk" x="438" y="50" width="58" height="38"/><text class="t w" x="467" y="61">FOR</text><text class="t w sm" x="467" y="77">UPDATE</text>
+            <rect class="n" x="278" y="116" width="164" height="44"/><text class="t sm" x="360" y="130">nearest centre &#183; locked</text><text class="t" x="360" y="146">stock qty = 10</text>
+            <rect class="n g" x="247" y="184" width="116" height="48"/><text class="t" x="305" y="200">A commits</text><text class="t sm" x="305" y="216">10 units</text>
+            <rect class="n r" x="377" y="184" width="116" height="48"/><text class="t w" x="435" y="200">B waits</text><text class="t w sm" x="435" y="216">then refused</text>
           </svg>
         </div>
       </div>
