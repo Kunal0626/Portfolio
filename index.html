@@ -157,14 +157,14 @@
     <!-- PROJECTS -->
     <h2 class="section-title mono reveal" id="projects"><span>&gt;</span> PROJECTS<span class="caret" aria-hidden="true"></span></h2>
 
-    <article class="card proj reveal" data-id="chainlog" data-status="building" data-repo="https://github.com/Kunal0626/ChainLog">
+    <article class="card proj reveal" data-id="chainlog" data-status="done" data-repo="https://github.com/Kunal0626/chainlog">
       <div class="titlebar dark"><span class="mono">▣ CHAINLOG.BIN</span><span class="mono status"></span></div>
       <div class="proj-body">
         <div class="proj-text">
           <p class="label mono" data-color="violet">DATA INTEGRITY</p>
           <h3>ChainLog</h3>
-          <p>A tamper-evident audit log engine in C++. Every record is hash-chained and batched into a Merkle tree, so any edit, deletion or reordering of history is detectable, with O(log n) inclusion proofs.</p>
-          <ul class="tech mono"><li>C++</li><li>SHA-256</li><li>Merkle Trees</li><li>WAL</li></ul>
+          <p>A tamper-evident audit log engine in C++17. Records are hash-chained and sealed into RFC 6962 Merkle trees, so any edit, deletion or reordering is detectable &mdash; and publishing the head as an anchor catches truncation too. Verifies a million records in 1.72&nbsp;s at a constant 2.3&nbsp;MiB.</p>
+          <ul class="tech mono"><li>C++17</li><li>SHA-256</li><li>Merkle Trees</li><li>WAL</li></ul>
           <div class="btn-row"><a class="btn btn-black gh" href="#" target="_blank" rel="noopener noreferrer">GitHub</a><button class="btn" type="button" data-open="chainlog">Details</button></div>
         </div>
         <div class="diagram" role="img" aria-label="Diagram: four log records, each hashed into a Merkle tree up to a root; an edited record breaks the hash path to the root.">

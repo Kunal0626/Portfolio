@@ -15,15 +15,17 @@
   const PROJECTS = {
     chainlog: {
       name: 'ChainLog', file: 'CHAINLOG.BIN', label: 'DATA INTEGRITY',
-      sum: 'A tamper-evident audit log engine in C++. Any edit, deletion or reordering of past records is detectable, and you can prove a record is in the log with a short Merkle proof.',
+      sum: 'A tamper-evident audit log engine in C++17. Any edit, deletion or reordering of past records is detectable, you can prove a record is in the log with a 690-byte Merkle proof, and a published anchor catches the two things a hash chain cannot see on its own.',
       how: [
-        'Each record stores the hash of the previous record (SHA-256), forming a hash chain.',
-        'Records are batched into a Merkle tree; the root is stored as a checkpoint.',
-        'An inclusion proof is just the sibling hashes along one path, so it is O(log n) in size.',
-        'Appends go through a write-ahead log first (the DBMS recovery idea), so a crash mid-write cannot corrupt history.',
-        'A verifier CLI recomputes the chain and reports the first record that does not match.'
+        'Each record stores the SHA-256 hash of the previous one, so editing any record breaks every link after it. SHA-256, the Merkle tree, the record format and the WAL are all written by hand \u2014 OpenSSL appears only as a test oracle.',
+        'Records are sealed in blocks of 1024 into an RFC 6962 Merkle tree. The stored root is what a proof is checked against, and it doubles as a second record of history that an attacker also has to rewrite.',
+        'An inclusion proof is the sibling hashes along one path: 20 hashes, 690 bytes, for a million-leaf tree \u2014 and it verifies with no access to the log at all.',
+        'Appends go through a write-ahead log first (the DBMS recovery idea), which makes a crash mid-write recoverable rather than merely detectable. Tested by killing the real binary at each step of the protocol and asserting exactly-once recovery.',
+        'A hash chain cannot detect a log truncated at a record boundary, or one rewritten end to end \u2014 both verify perfectly. Publishing the head as an anchor catches both; HMAC-signed checkpoints catch the rewrite. Those limits are pinned as passing tests.',
+        'Verifies 1,000,000 records in 1.72 s at a constant 2.3 MiB peak memory, because verify streams frames and holds only the current block\u2019s 1024 leaf hashes.',
+        'Validated against other people\u2019s implementations rather than its own: 1,432 cross-checks against shasum, OpenSSL and Python, including a parser written from the spec that must emit byte-identical Merkle proofs.'
       ],
-      concepts: ['Trees (DSA)', 'Hashing', 'Write-ahead logging (DBMS)', 'Crash safety']
+      concepts: ['Hashing & Merkle trees (DSA)', 'Write-ahead logging (DBMS)', 'Crash recovery', 'Applied cryptography']
     },
     sandboxlite: {
       name: 'SandboxLite', file: 'SANDBOXLITE.BIN', label: 'OPERATING SYSTEMS',
