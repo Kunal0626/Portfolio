@@ -56,12 +56,13 @@
       name: 'ChokePoint', file: 'CHOKEPOINT.PY', label: 'GRAPH ALGORITHMS',
       sum: 'An analyzer that finds how an attacker would reach a critical asset, and which few fixes would cut off every route.',
       how: [
-        'The network is a directed, weighted graph: hosts are nodes, exploit difficulty sets edge weights.',
-        'Dijkstra finds the cheapest route from the entry point to the crown-jewel asset.',
-        'Max-flow (Edmonds–Karp) computes the bottleneck; the min-cut is the smallest set of links to fix.',
-        'Output is a ranked patch list plus a graph picture with the cut edges highlighted.'
+        'The network is a directed graph in JSON. Every link carries two separate numbers: how hard the step is for an attacker, and what it costs the defender to close it — keeping them apart is what stops the tool answering the wrong question.',
+        'Dijkstra finds the cheapest attacker route; Yen’s algorithm returns the next-best loopless routes, so the alternatives are visible and not just the winner.',
+        'Edmonds–Karp max-flow, with the cut read off the residual graph, gives the cheapest set of fixes that disconnects every entry point from every target. Three self-checks verify that result on every run, including a fresh search proving the target really is unreachable.',
+        'A what-if mode applies one fix and recomputes; the report comes out as text, JSON and a graph picture with the cut in red.',
+        'Dijkstra, Yen, Edmonds–Karp and the min-cut are written by hand with no graph library at runtime. A 1,000-node, 5,000-edge network analyses in under 160 ms, and the implementations are checked against networkx across 1,500 comparisons on random graphs.'
       ],
-      concepts: ['Shortest paths (DAA)', 'Max-flow / min-cut', 'Graph modelling', 'Risk prioritisation']
+      concepts: ['Shortest paths (DAA)', 'k-shortest paths (Yen)', 'Max-flow / min-cut', 'Residual graphs', 'Graph modelling', 'Risk prioritisation']
     },
     shadowpot: {
       name: 'ShadowPot', file: 'SHADOWPOT.PY', label: 'THREAT INTELLIGENCE',

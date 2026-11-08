@@ -241,14 +241,14 @@
       </div>
     </article>
 
-    <article class="card proj reveal" data-id="chokepoint" data-status="building" data-repo="https://github.com/Kunal0626/ChokePoint">
+    <article class="card proj reveal" data-id="chokepoint" data-status="done" data-repo="https://github.com/Kunal0626/ChokePoint">
       <div class="titlebar dark"><span class="mono">▣ CHOKEPOINT.PY</span><span class="mono status"></span></div>
       <div class="proj-body">
         <div class="proj-text">
           <p class="label mono" data-color="green">GRAPH ALGORITHMS</p>
           <h3>ChokePoint</h3>
-          <p>An attack-path and patch-priority analyzer. It models a network as a weighted graph, uses Dijkstra to find the cheapest attacker route to a critical asset, then max-flow / min-cut to find the smallest set of fixes that severs every path.</p>
-          <ul class="tech mono"><li>Python</li><li>Dijkstra</li><li>Max-Flow</li><li>Min-Cut</li></ul>
+          <p>An attack-path and patch-priority analyzer. It models a network as a directed graph, uses Dijkstra and Yen’s algorithm to find the cheapest attacker routes to a critical asset, then max-flow / min-cut to find the smallest set of fixes that severs every path. A 1,000-node network analyses in under 160&nbsp;ms.</p>
+          <ul class="tech mono"><li>Python</li><li>Dijkstra</li><li>Yen’s k-Shortest</li><li>Max-Flow</li><li>Min-Cut</li></ul>
           <div class="btn-row"><a class="btn btn-black gh" href="#" target="_blank" rel="noopener noreferrer">GitHub</a><button class="btn" type="button" data-open="chokepoint">Details</button></div>
         </div>
         <div class="diagram" role="img" aria-label="Diagram: a network graph from the internet through a web server or VPN to an app server and then a database; the cheapest attack path is highlighted and the link into the database is marked as the minimum cut.">
