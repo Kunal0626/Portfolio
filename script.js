@@ -91,6 +91,15 @@
   $$('.proj').forEach(card => {
     const st = card.dataset.status === 'done' ? 'done' : 'building';
     $('.status', card).textContent = 'STATUS: ' + STATUS_TEXT[st];
+    // Live demo link, same shape as the repo link below: it exists only on
+    // cards carrying data-live, and is removed rather than left dangling.
+    const live = $('.live', card);
+    const liveUrl = (card.dataset.live || '').trim();
+    if (live) {
+      if (liveUrl) { live.href = liveUrl; }
+      else { live.remove(); }
+    }
+
     const gh = $('.gh', card);
     const repo = (card.dataset.repo || '').trim();
     if (gh) {

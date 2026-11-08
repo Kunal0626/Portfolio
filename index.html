@@ -299,7 +299,7 @@
       </div>
     </article>
 
-    <article class="card proj reveal" data-id="disaster" data-status="done" data-repo="https://github.com/Kunal0626/ResNav">
+    <article class="card proj reveal" data-id="disaster" data-status="done" data-repo="https://github.com/Kunal0626/ResNav" data-live="https://resnav-ten.vercel.app">
       <div class="titlebar dark"><span class="mono">▣ RESNAV.SQL</span><span class="mono status"></span></div>
       <div class="proj-body">
         <div class="proj-text">
@@ -307,7 +307,7 @@
           <h3>ResNav</h3>
           <p>Full-stack relief logistics where the database is the source of truth. A React console calls a Flask API, but the allocation itself runs inside MySQL: a stored procedure takes row locks in a fixed order and assigns the nearest relief centre with stock, so two dispatchers cannot promise the same units. Ten triggers and twenty-two constraints hold the invariants; two-session tests prove the race is gone.</p>
           <ul class="tech mono"><li>MySQL</li><li>Stored procedures</li><li>Triggers</li><li>Concurrency</li><li>Flask</li><li>React</li></ul>
-          <div class="btn-row"><a class="btn btn-black gh" href="#" target="_blank" rel="noopener noreferrer">GitHub</a><button class="btn" type="button" data-open="disaster">Details</button></div>
+          <div class="btn-row"><a class="btn btn-black gh" href="#" target="_blank" rel="noopener noreferrer">GitHub</a><a class="btn live" href="#" target="_blank" rel="noopener noreferrer" title="Read-only demo: real snapshot data, allocation and free-text search disabled">Live demo</a><button class="btn" type="button" data-open="disaster">Details</button></div>
         </div>
         <div class="diagram" role="img" aria-label="Diagram: two React dispatcher consoles call one Flask API, which hands the request to a stored procedure inside MySQL. The procedure locks the nearest relief centre's stock row with FOR UPDATE, so one dispatcher commits ten units while the other waits and is then refused.">
           <svg viewBox="0 0 520 260" aria-hidden="true">
