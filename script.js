@@ -72,7 +72,7 @@
       concepts: ['Honeypots', 'Log parsing', 'Normalization & SQL aggregation', 'Attacker behaviour']
     },
     disaster: {
-      name: 'ResNav \u2014 Disaster Resource Allocation', file: 'RESNAV.SQL', label: 'FULL-STACK / DBMS',
+      name: 'ResNav', file: 'RESNAV.SQL', label: 'FULL-STACK / DBMS',
       sum: 'Relief logistics where the database, not the application, guarantees that stock is never promised twice.',
       how: [
         'A React console calls a Flask API, which hands the allocation decision to MySQL rather than making it.',
