@@ -66,13 +66,15 @@
     },
     shadowpot: {
       name: 'ShadowPot', file: 'SHADOWPOT.PY', label: 'THREAT INTELLIGENCE',
-      sum: 'An SSH honeypot built on Cowrie, with SQL analytics to study how attackers behave once they think they are inside.',
+      sum: 'An SSH honeypot analytics pipeline: Cowrie’s event log into a 3NF SQL schema, with the queries that turn connection records into attacker behaviour.',
       how: [
-        'Cowrie presents a fake SSH server and records every login attempt and command.',
-        'Session logs are loaded into a normalized SQL schema (sessions, credentials, commands, source IPs).',
-        'Queries rank the most-tried credentials, repeat source IPs and common post-login commands.'
+        'Cowrie presents a fake SSH server and records every login attempt and command; the pipeline on top of it — parser, schema, loader, queries, report — is the part that is mine.',
+        'A 12-table 3NF schema derived from Cowrie’s own event format, in SQLite and MySQL. A nullable password silently defeats UNIQUE, because SQL treats NULLs as distinct, so credentials are split across two NOT NULL tables with a CHECK-enforced exclusive arc.',
+        'The loader is idempotent and crash-resumable two independent ways: UNIQUE natural keys and a SHA-256 line ledger. It stores inode, size, offset and a first-line hash — the last of which is what catches a log truncated in place and rewritten to the same length.',
+        'Eighteen analytics queries using window functions, CTEs and GROUP BY ... HAVING: credential spraying, repeat offenders, command bigrams via LEAD, and a labelled heuristic for scripted versus hand-driven sessions.',
+        '160,708 generated log lines load in under 10 s; 364 tests; 7 candidate indexes measured with EXPLAIN QUERY PLAN and the 4 that changed a query plan kept. Real-world capture is pending — the deployment runbook is in the repo, and no number here comes from real attackers.'
       ],
-      concepts: ['Honeypots', 'Log parsing', 'Normalization & SQL aggregation', 'Attacker behaviour']
+      concepts: ['Normalization (3NF)', 'Functional dependencies', 'Window functions', 'Idempotent ingestion', 'Index measurement', 'Honeypots', 'Attacker behaviour']
     },
     disaster: {
       name: 'ResNav', file: 'RESNAV.SQL', label: 'FULL-STACK / DBMS',
