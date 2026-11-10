@@ -8,7 +8,7 @@ style.css    all styling (neo-brutalist "retro OS" look, day/night themes)
 script.js    terminal, explorer, project dialog, starfield, theme toggle
 theme.js     tiny head script that sets the theme before first paint
 vercel.json  clean URLs + security headers (CSP, X-Frame-Options, ...)
-assets/      Kunal_Singh_Resume.pdf
+assets/      profile.jpg
 ```
 
 ## Deploy on Vercel
@@ -33,7 +33,6 @@ Rename the project in Vercel to get a URL like `kunal-singh.vercel.app`.
   - When a project is really finished, change `data-status="building"` to `data-status="done"`.
   - Add its repo: `data-repo="https://github.com/Kunal0626/chainlog"`. The GitHub button turns on and the NOW.LOG card updates by itself.
 - **Photo:** the avatar is an SVG shield. To use a photo, put `profile.jpg` in `assets/` and replace the `<svg>…</svg>` inside `.avatar-frame` with `<img src="assets/profile.jpg" alt="Kunal Singh">`.
-- **Résumé:** replace `assets/Kunal_Singh_Resume.pdf` and keep the filename.
 - **Project text and details:** the short text is in `index.html`; the "Details" popups and terminal output come from the `PROJECTS` object at the top of `script.js`.
 
 ## Test locally

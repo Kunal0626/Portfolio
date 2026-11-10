@@ -7,8 +7,7 @@
   const LINKS = {
     email: 'kunalsinghh0626@gmail.com',
     github: 'https://github.com/Kunal0626',
-    linkedin: 'https://www.linkedin.com/in/kunal-singh-b7a807318/',
-    resume: 'assets/Kunal_Singh_Resume.pdf'
+    linkedin: 'https://www.linkedin.com/in/kunal-singh-b7a807318/'
   };
 
   /* ---------- Project data (shown in the details dialog and the terminal) ---------- */
@@ -309,17 +308,17 @@
         row([{ b: 'Available commands' }]);
         [['whoami', 'who is Kunal'], ['about', 'short bio'], ['education', 'where I study'], ['skills', 'languages, core CS, security'],
          ['projects', 'list projects and status'], ['open <name>', 'open a project, e.g. open chainlog'], ['contact', 'email, LinkedIn, GitHub'],
-         ['resume', 'download my résumé'], ['theme', 'toggle day / night'], ['ls', 'list files'], ['clear', 'clear the screen']]
+         ['theme', 'toggle day / night'], ['ls', 'list files'], ['clear', 'clear the screen']]
           .forEach(([c, d]) => row(['  ', { b: c.padEnd(14) }, d]));
       },
       whoami() { row('kunal-singh: cyber security student, tool builder, VIT Chennai (2028).'); },
       about() {
-        row('B.Tech Cyber Security @ VIT Chennai, CGPA 8.2/10.');
+        row('B.Tech Cyber Security @ VIT Chennai.');
         row('I build security tools from scratch in C, C++, Java and Python, using DSA, DAA, OS and DBMS on real defensive problems.');
         row('Looking for a Summer 2027 internship.');
       },
       education() {
-        row([{ b: 'VIT Chennai' }, ' · B.Tech Cyber Security · 2024–2028 · CGPA 8.2/10']);
+        row([{ b: 'VIT Chennai' }, ' · B.Tech Cyber Security · 2024–2028']);
         row('D.A.V Public School, Ludhiana · Class XII (2024), Class X (2022)');
       },
       skills() {
@@ -346,11 +345,10 @@
         row([{ b: 'linkedin  ' }, { a: ['kunal-singh-b7a807318', LINKS.linkedin] }]);
         row([{ b: 'github    ' }, { a: ['Kunal0626', LINKS.github] }]);
       },
-      resume() { row([{ a: ['Download Kunal_Singh_Resume.pdf', LINKS.resume] }]); },
       github() { row([{ a: [LINKS.github, LINKS.github] }]); },
       linkedin() { row([{ a: [LINKS.linkedin, LINKS.linkedin] }]); },
       theme() { themeBtn.click(); row('theme: ' + root.getAttribute('data-theme')); },
-      ls() { row('about.txt  projects/  skills/  contact.txt  Kunal_Singh_Resume.pdf'); },
+      ls() { row('about.txt  projects/  skills/  contact.txt'); },
       cat(arg) {
         if (/^about(\.txt)?$/.test(arg || '')) cmds.about();
         else if (/^contact(\.txt)?$/.test(arg || '')) cmds.contact();
